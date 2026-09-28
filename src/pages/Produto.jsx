@@ -91,7 +91,7 @@ function Produto() {
             <>
               <p className="wz-pdp-label">Selecione um Tamanho</p>
               <div className="wz-size-options">
-                {product.sizesStock.map(({ size, stock_quantity }) => (
+                {product.sizesStock.map(({ size }) => (
                   <button
                     key={size}
                     type="button"
@@ -100,7 +100,6 @@ function Produto() {
                       setSelectedSize(size)
                       setQuantity(1)
                     }}
-                    disabled={stock_quantity <= 0}
                   >
                     {size}
                   </button>
@@ -113,13 +112,7 @@ function Produto() {
             <div className="wz-qty-control">
               <button type="button" onClick={() => setQuantity((q) => Math.max(1, q - 1))} aria-label="Diminuir quantidade">-</button>
               <span>{quantity}</span>
-              <button
-                type="button"
-                onClick={() => setQuantity((q) => (selectedSize ? Math.min(q + 1, selectedSizeStock) : q + 1))}
-                aria-label="Aumentar quantidade"
-              >
-                +
-              </button>
+              <button type="button" onClick={() => setQuantity((q) => q + 1)} aria-label="Aumentar quantidade">+</button>
             </div>
 
             <button type="button" className="wz-add-to-cart-btn" disabled={!selectedSize} onClick={handleAddToCart}>

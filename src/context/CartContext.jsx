@@ -33,12 +33,10 @@ export function CartProvider({ children }) {
       const existing = current.find((item) => sameItem(item, slug, size))
       if (existing) {
         return current.map((item) =>
-          sameItem(item, slug, size)
-            ? { ...item, quantity: Math.min(item.quantity + quantity, stock), stock }
-            : item
+          sameItem(item, slug, size) ? { ...item, quantity: item.quantity + quantity, stock } : item
         )
       }
-      return [...current, { slug, title, image, price, size, quantity: Math.min(quantity, stock), stock }]
+      return [...current, { slug, title, image, price, size, quantity, stock }]
     })
   }
 
